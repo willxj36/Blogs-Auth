@@ -7,3 +7,9 @@ export interface Blog {
     _updated?: string,
     tag: string
 }
+
+export interface Payload {
+    [key: string]: any,
+    userid: number,
+    unique?: string
+}

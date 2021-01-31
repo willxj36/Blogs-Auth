@@ -1,5 +1,1 @@
-import * as mysql from 'mysql';
-
-
-
-export default pool;
+export default require(`${process.env.NODE_ENV}`).default;
