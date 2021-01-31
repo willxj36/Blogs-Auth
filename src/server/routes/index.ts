@@ -1,14 +1,9 @@
 import * as express from 'express';
-import blogRouter from './blogs';
-import authorRouter from './authors';
-import tagRouter from './tags';
-import blogTagRouter from './blogtags';
-
+import authRouter from './auth';
+import apiRouter from './api';
 const router = express.Router();
 
-router.use('/blogs', blogRouter);
-router.use('/authors', authorRouter);
-router.use('/tags', tagRouter);
-router.use('/blogtags', blogTagRouter);
+router.use('/auth', authRouter);
+router.use('/api', apiRouter);
 
 export default router;

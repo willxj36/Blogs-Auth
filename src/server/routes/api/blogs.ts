@@ -1,9 +1,9 @@
 import * as express from 'express';
-import db from '../db';
+import db from '../../db';
 
 const router = express.Router();
 
-router.get('/:id?', async (req, res) => {
+router.get('/:id?', async (req, res, next) => {
     try {
         let id = Number(req.params.id);
         if(id) {
@@ -19,7 +19,7 @@ router.get('/:id?', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
     try {
         let {title, content, author, tags} = req.body;
         let response = await db.Blogs.post(title, content, author, tags);
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
     try {
         let {title, content, tags} = req.body;
         let id = Number(req.params.id);

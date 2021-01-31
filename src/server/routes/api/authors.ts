@@ -1,5 +1,5 @@
 import * as express from 'express';
-import db from '../db';
+import db from '../../db';
 
 const router = express.Router();
 
@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', (req, res) => {
     try {
-        let { name, email } = req.body;
-        db.Authors.post(name, email);
+        let user = req.body;
+        db.Authors.post(user);
         res.send('Author added!')
     } catch(e) {
         console.log(e);
@@ -26,9 +26,9 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     try {
-        let { name, email } = req.body;
-        let id = Number(req.params.id);
-        db.Authors.put(name, email, id);
+        let user = req.body;
+        user.id = Number(req.params.id);
+        db.Authors.put(user);
         res.send('Author edited!')
     } catch(e) {
         console.log(e);

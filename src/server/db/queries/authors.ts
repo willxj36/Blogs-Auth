@@ -1,4 +1,5 @@
 import { Query } from '../';
+import { User } from '../../../utils/models';
 
 const get = async () => Query('SELECT id, name FROM authors')
 
@@ -6,12 +7,10 @@ const getOneEmail = async (email: string) => Query('SELECT * FROM authors WHERE 
 
 const getOneId = async (id: number) => Query('SELECT * FROM authors WHERE id = ? LIMIT 1', [id]);
 
-const post = async (name: string, email: string) => Query('INSERT INTO authors SET name = ?, email = ?', [name, email]); //likely need some changes
+const post = async (user: User) => Query('INSERT INTO authors (name, email, password) VALUES ?', [user]);
 
-const put = async (name: string, email: string, id: number) => Query('UPDATE authors SET name = ?, email = ? WHERE id = ?', [name, email, id]); //likely needs some changes
+const put = async (user: User) => Query('UPDATE authors SET (name, email, password) VALUES ? WHERE id = ?', [user]);
 
 const deleter = async (id: number) => Query('DELETE FROM authors WHERE id = ?', [id]);
 
 export default { get, getOneEmail, getOneId, post, put, deleter };
-
-//post, put, delete requests were going to be fancy features to do a little extra, but now will just be placeholders for after the auth section
