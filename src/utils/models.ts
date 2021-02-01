@@ -10,7 +10,7 @@ export interface Blog {
 
 export interface Payload {
     [key: string]: any,
-    userid: number,
+    userid?: number,
     unique?: string
 }
 

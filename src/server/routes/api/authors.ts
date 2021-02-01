@@ -13,17 +13,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/', (req, res) => {
-    try {
-        let user = req.body;
-        db.Authors.post(user);
-        res.send('Author added!')
-    } catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
-})
-
 router.put('/:id', (req, res) => {
     try {
         let user = req.body;

@@ -1,16 +1,27 @@
 import * as express from 'express';
 import db from '../../db';
+import { RequestHandler } from 'express-serve-static-core';
+
 
 const router = express.Router();
 
-router.get('/:id?', async (req, res, next) => {
+const isAdmin: RequestHandler = (req: any, res, next) => {
+    if(!req.user || req.user.role !== 'admin') {
+        return res.sendStatus(401);
+    } else {
+        return next();
+    }
+};
+
+
+router.get('/:id?', isAdmin, async (req, res, next) => {
     try {
         let id = Number(req.params.id);
         if(id) {
             let blog = await db.Blogs.one(id);
             res.send(blog);
         } else {
-            let blogs = await db.Blogs.all();
+            let [blogs] = await db.Blogs.all();
             res.send(blogs);
         }
     } catch(e) {
